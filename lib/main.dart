@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:js' as js;
 
-/// Main entry point of the application, launching the [MyApp] widget.
 void main() {
   runApp(const MyApp());
 }
 
-/// The main application widget.
-///
-/// Creates an application with the title "Flutter Demo" and displays the [HomePage].
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -21,7 +17,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// The main page of the application, containing an image and control buttons.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -31,13 +26,13 @@ class HomePage extends StatefulWidget {
 
 /// State for the [HomePage].
 class _HomePageState extends State<HomePage> {
-  /// Controller for the image URL input field.
+  /// Controller for the image URL input field
   late final TextEditingController _urlController;
 
-  /// The current image URL.
+  /// The current image URL
   String _imageUrl = '';
 
-  /// Flag indicating the menu state.
+  /// Flag indicating the menu state
   bool _isMenuOpen = false;
 
   @override
@@ -52,14 +47,14 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  /// Loads an image from the entered URL.
+  /// Loads an image from the entered URL
   void _loadImage() {
     setState(() {
       _imageUrl = _urlController.text;
     });
   }
 
-  /// Toggles full-screen mode.
+  /// Toggles full-screen mode
   void _toggleFullScreen() {
     js.context.callMethod('eval', [
       """
@@ -72,19 +67,19 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
-  /// Enters full-screen mode.
+  /// Enters full-screen mode
   void _enterFullscreen() {
     js.context.callMethod("eval", ["document.documentElement.requestFullscreen();"]);
     _toggleMenu();
   }
 
-  /// Exits full-screen mode.
+  /// Exits full-screen mode
   void _exitFullscreen() {
     js.context.callMethod("eval", ["document.exitFullscreen();"]);
     _toggleMenu();
   }
 
-  /// Toggles the menu state.
+  /// Toggles the menu state
   void _toggleMenu() {
     setState(() {
       _isMenuOpen = !_isMenuOpen;
